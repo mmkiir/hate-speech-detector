@@ -28,6 +28,7 @@ window.addEventListener("load", () => {
               .then((data) => {
                 console.log("tweetText:", tweetText, "data:", data);
                 if (data.class === 2) return;
+                tweet.style.pointerEvents = "none";
                 const warning = document.createElement("div");
                 warning.style.position = "absolute";
                 warning.style.inset = "2px";
@@ -41,7 +42,6 @@ window.addEventListener("load", () => {
                   "TwitterChirp,Helvetica Neue,Helvetica,Arial,sans-serif";
                 warning.style.margin = "4px";
                 warning.style.borderRadius = "20px";
-                warning.style.pointerEvents = "none";
                 const warningText = document.createElement("p");
                 switch (data.class) {
                   case 0:
@@ -59,9 +59,10 @@ window.addEventListener("load", () => {
                 warningButton.innerText = "Show tweet";
                 warningButton.addEventListener("click", () => {
                   warning.style.display = "none";
+                  tweet.style.pointerEvents = "auto";
                 });
                 warning.appendChild(warningButton);
-                tweet.appendChild(warning);
+                tweet.insertAdjacentElement("afterend", warning);
               });
           }
         });
